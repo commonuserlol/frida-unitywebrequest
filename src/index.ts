@@ -11,7 +11,7 @@ type SendResult = Omit<UnityWebRequest, "sendGet" | "sendPost" | "get" | "post" 
  * @export
  * @class UnityWebRequest
  */
-class UnityWebRequest extends Il2Cpp.Object {
+export default class UnityWebRequest extends Il2Cpp.Object {
     /** @internal */
     static UnityWebRequestModule: Il2Cpp.Image;
     /** @internal */
@@ -278,6 +278,3 @@ getter(
     () => Il2Cpp.corlib.class("System.Action`1").inflate(Il2Cpp.domain.assembly("UnityEngine.CoreModule").image.class("UnityEngine.AsyncOperation")),
     lazy
 );
-
-
-export { UnityWebRequest };

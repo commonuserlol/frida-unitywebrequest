@@ -1,15 +1,15 @@
 {
     "compilerOptions": {
-      "lib": ["ESNext"],
-      "target": "ES2020",
-      "moduleResolution": "node",
-      "outDir": "dist",
-      "sourceRoot": "src",
-      "declaration": true,
-      "experimentalDecorators": true,
-      "sourceMap": true,
-      "strict": true,
-      "stripInternal": true
-    }
-  }
-  
+        "lib": ["ESNext"],
+        "target": "ES2020",
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "sourceRoot": "src",
+        "declaration": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "strict": true,
+        "stripInternal": true
+    },
+    "include": ["src/**/*"]
+}

@@ -2,7 +2,7 @@
     "name": "frida-unitywebrequest",
     "version": "1.0.0",
     "description": "Small wrapper around UnityWebRequest for IL2CPP Unity games",
-    "main": "index.js",
+    "main": "dist/index.js",
     "devDependencies": {
         "@types/frida-gum": "^18.7.0",
         "esbuild": "^0.23.0"
@@ -17,6 +17,13 @@
     ],
     "author": "commonuserlol",
     "license": "AGPL-3.0",
+    "exports": "./dist/index.js",
+    "module": "dist/index.js",
+    "type": "module",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "prettier": {
         "tabWidth": 4,
         "arrowParens": "avoid",
