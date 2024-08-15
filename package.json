@@ -26,6 +26,6 @@
         "trailingComma": "none"
     },
     "dependencies": {
-        "frida-il2cpp-bridge": "^0.9.0"
+        "frida-il2cpp-bridge": "github:commonuserlol/frida-il2cpp-bridge#dev"
     }
 }

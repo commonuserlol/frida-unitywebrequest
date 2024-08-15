@@ -15,6 +15,13 @@ Il2Cpp.perform(() => {
                 (globalThis as any).console.error("Unreachable!");
             } catch (_) {}
         });
+        await test("Get with custom headers", async () => {
+            const response = await UnityWebRequest.sendGet("https://httpbin.org/anything", { "X-Test": "test", "X-Test2": "test2" });
+            assertEq(200, response.responseCode);
+            assertEq("test", response.json.headers["X-Test"]);
+            assertEq("test2", response.json.headers["X-Test2"]);
+            response.dispose();
+        });
         await test("Get deflated data", async () => {
             const response = await UnityWebRequest.sendGet("https://httpbin.org/deflate");
             assertEq(true, response.json.deflated);
@@ -66,6 +73,25 @@ Il2Cpp.perform(() => {
                 (globalThis as any).console.error("Unreachable!");
             } catch (_) {}
         });
+        await test("Post with objects in data", async () => {
+            const form = {
+                hello: "world",
+                foo: { bar: ["baz", 1337] },
+                baz: [{ a: ["b", 1, "c"] }]
+            };
+            const response = await UnityWebRequest.sendPost("https://httpbin.org/anything", form);
+            assertEq(200, response.responseCode);
+            assertEq(JSON.stringify(form), response.json.data);
+            response.dispose();
+        });
+        await test("Post with custom headers", async () => {
+            const response = await UnityWebRequest.sendPost("https://httpbin.org/anything", { hello: "world" }, { "X-Test": "test", "X-Test2": "test2" });
+            assertEq(200, response.responseCode);
+            assertEq("world", response.json.form.hello);
+            assertEq("test", response.json.headers["X-Test"]);
+            assertEq("test2", response.json.headers["X-Test2"]);
+            response.dispose();
+        });
         await test("Post delayed request", async () => {
             const response = await UnityWebRequest.sendPost("https://httpbin.org/delay/2", { hello: "world" });
             assertEq(200, response.responseCode);
@@ -96,19 +122,13 @@ async function test(name: string, block: () => Promise<void>) {
 
     try {
         await block();
-        results.passed++;
-    } catch (e) {
-        switch ((e as Error).message) {
-            case "Assertion failed":
-                (globalThis as any).console.error(`Assertion failed for ${name}`);
-                break;
-            default:
-                (globalThis as any).console.error(e);
-        }
-        results.failed++;
-    } finally {
         const elapsed = Date.now() - now;
         (globalThis as any).console.log(`\x1B[32mDone ${name} in ${elapsed}ms\x1B[0m`);
+        results.passed++;
+    } catch (e) {
+        const elapsed = Date.now() - now;
+        (globalThis as any).console.error(`Failed ${name} in ${elapsed}ms due to ${e}`);
+        results.failed++;
     }
 }
 

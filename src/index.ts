@@ -240,8 +240,8 @@ export default class UnityWebRequest extends Il2Cpp.Object {
             const content = result.text;
             request.dispose();
             throw new Error(`Failed to invoke Get request on ${url}, \
-error: ${error}, \
-${content ? `response: ${content}` : ``}`);
+error: ${error}\
+${content ? `, response: ${content}` : ``}`);
         }
         return result;
     }
