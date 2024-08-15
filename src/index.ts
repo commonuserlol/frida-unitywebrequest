@@ -3,7 +3,7 @@ import getter from "./getter";
 import lazy from "./lazy";
 
 type PostBody = string | Record<string, string | Object>;
-export type SendResult = Omit<UnityWebRequest, "simpleGet" | "simplePost" | "get" | "post" | "sendWebRequest" | keyof Il2Cpp.Object>;
+type SendResult = Omit<UnityWebRequest, "sendGet" | "sendPost" | "get" | "post" | "sendWebRequest" | keyof Il2Cpp.Object>;
 
 /**
  * Wrapper over `UnityWebRequest`

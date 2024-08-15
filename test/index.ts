@@ -1,4 +1,4 @@
-import UnityWebRequest, { SendResult } from "../src";
+import UnityWebRequest from "../src";
 
 Il2Cpp.perform(() => {
     setTimeout(async () => {
@@ -12,7 +12,7 @@ Il2Cpp.perform(() => {
         await test("Get 404", async () => {
             try {
                 await UnityWebRequest.sendGet("https://httpbin.org/status/404");
-                console.error("Unreachable!");
+                (globalThis as any).console.error("Unreachable!");
             } catch (_) {}
         });
         await test("Get deflated data", async () => {
@@ -49,7 +49,7 @@ Il2Cpp.perform(() => {
         await test("Get 404 redirect", async () => {
             try {
                 await UnityWebRequest.sendGet("https://httpbin.org/redirect-to?url=https%3A%2F%2Fhttpbin.org%2Fstatus%2F404&status_code=302");
-                console.error("Unreachable!");
+                (globalThis as any).console.error("Unreachable!");
             } catch (_) {}
         });
 
@@ -63,7 +63,7 @@ Il2Cpp.perform(() => {
         await test("Post 404", async () => {
             try {
                 await UnityWebRequest.sendPost("https://httpbin.org/status/404", { hello: "world" });
-                console.error("Unreachable!");
+                (globalThis as any).console.error("Unreachable!");
             } catch (_) {}
         });
         await test("Post delayed request", async () => {
@@ -85,7 +85,7 @@ Il2Cpp.perform(() => {
             });
         });
 
-        console.log(`Summary: \x1B[32m${results.passed} \u2714\x1B[0m \x1B[31m${results.failed} \u2718\x1B[0m`);
+        (globalThis as any).console.log(`Summary: \x1B[32m${results.passed} \u2714\x1B[0m \x1B[31m${results.failed} \u2718\x1B[0m`);
     }, 500);
 });
 
@@ -100,15 +100,15 @@ async function test(name: string, block: () => Promise<void>) {
     } catch (e) {
         switch ((e as Error).message) {
             case "Assertion failed":
-                console.error(`Assertion failed for ${name}`);
+                (globalThis as any).console.error(`Assertion failed for ${name}`);
                 break;
             default:
-                console.error(e);
+                (globalThis as any).console.error(e);
         }
         results.failed++;
     } finally {
         const elapsed = Date.now() - now;
-        console.log(`\x1B[32mDone ${name} in ${elapsed}ms\x1B[0m`);
+        (globalThis as any).console.log(`\x1B[32mDone ${name} in ${elapsed}ms\x1B[0m`);
     }
 }
 
