@@ -1,0 +1,30 @@
+{
+    "name": "frida-unitywebrequest",
+    "version": "1.0.0",
+    "description": "Small wrapper around UnityWebRequest for IL2CPP Unity games",
+    "main": "index.js",
+    "devDependencies": {
+        "esbuild": "^0.23.0"
+    },
+    "scripts": {
+        "prepare": "tsc",
+        "test": "esbuild --bundle test/index.ts --outfile=index.js --sourcemap=inline"
+    },
+    "keywords": [
+        "frida",
+        "unity"
+    ],
+    "author": "commonuserlol",
+    "license": "AGPL-3.0",
+    "prettier": {
+        "tabWidth": 4,
+        "arrowParens": "avoid",
+        "endOfLine": "lf",
+        "printWidth": 160,
+        "bracketSpacing": true,
+        "trailingComma": "none"
+    },
+    "dependencies": {
+        "frida-il2cpp-bridge": "^0.9.0"
+    }
+}
